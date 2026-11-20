@@ -1,0 +1,31 @@
+PeakTech 2275 - third-party notices
+==================================
+
+The PeakTech 2275 application source and its animated OsciViewer logo are
+available under the MIT license (LICENSE). The distributed application linked
+with Qt Charts is available as a combined work under GPL version 3. See
+licenses/GPL-3.0.txt. The original license terms of each component still apply.
+
+Corresponding source
+--------------------
+Application source and build and installation scripts for this release:
+https://github.com/GitterRalf/peaktech2275/releases/tag/v1.2.0
+
+The unmodified Qt 6.11.0 components come from the official MinGW x64 Qt kit.
+Matching Qt sources are available from the Qt 6.11.0 source archive:
+https://download.qt.io/archive/qt/6.11/6.11.0/submodules/
+See qtbase, qtcharts, qtserialport, qtsvg and qttranslations.
+
+Qt 6.11.0
+---------
+The setup includes Qt Charts, which is provided under GPL version 3:
+https://doc.qt.io/qt-6/qtcharts-index.html#licenses
+The other Qt modules and plugins retain their own terms. See the Qt licensing
+information and the LGPLv3 and GPLv3 texts in licenses/:
+https://doc.qt.io/qt-6/licensing.html
+
+GCC and MinGW-w64
+----------------
+libgcc and libstdc++ come from the GCC toolchain. See the GPLv3 and GCC Runtime
+Library Exception texts in licenses/. The MinGW-w64 winpthreads notices are in
+licenses/MinGW-w64-winpthreads.txt.
