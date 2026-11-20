@@ -4,13 +4,9 @@ Windows-Anwendung zur seriellen Steuerung der programmierbaren elektronischen La
 
 ## Bildschirmaufnahmen
 
-### Helle Ansicht
-
-![PeakTech 2275 in der hellen Ansicht](docs/screenshots/peaktech2275-hell.png)
-
-### Dunkle Ansicht
-
-![PeakTech 2275 in der dunklen Ansicht](docs/screenshots/peaktech2275-dunkel.png)
+| Hell | Dunkel |
+| --- | --- |
+| <a href="docs/screenshots/peaktech2275-hell.png"><img src="docs/screenshots/peaktech2275-hell.png" alt="PeakTech 2275 in der hellen Ansicht" width="400"></a> | <a href="docs/screenshots/peaktech2275-dunkel.png"><img src="docs/screenshots/peaktech2275-dunkel.png" alt="PeakTech 2275 in der dunklen Ansicht" width="400"></a> |
 
 ## Installation unter Windows
 
