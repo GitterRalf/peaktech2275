@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDeadlineTimer>
+#include <QMetaType>
 #include <QObject>
 #include <QString>
 #include <QList>
@@ -59,6 +60,11 @@ struct Reading {
 };
 
 enum class TestEnd { Cutoff, Stopped, DeviceStopped, Fault, Disconnected };
+
+Q_DECLARE_METATYPE(Reading)
+Q_DECLARE_METATYPE(LoadSetup)
+Q_DECLARE_METATYPE(TestEnd)
+Q_DECLARE_METATYPE(ListProgram)
 
 class PeakTech : public QObject
 {

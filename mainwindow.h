@@ -10,22 +10,36 @@
 
 #include <array>
 
-class QAction;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+namespace QtCharts {
 class QChart;
 class QChartView;
+class QLineSeries;
+class QValueAxis;
+}
+using QtCharts::QChart;
+using QtCharts::QChartView;
+using QtCharts::QLineSeries;
+using QtCharts::QValueAxis;
+#else
+class QChart;
+class QChartView;
+class QLineSeries;
+class QValueAxis;
+#endif
+
+class QAction;
 class QCheckBox;
 class QCloseEvent;
 class QComboBox;
 class QDoubleSpinBox;
 class QGroupBox;
 class QLabel;
-class QLineSeries;
 class QMenu;
 class QPushButton;
 class QSpinBox;
 class QTabWidget;
 class QTableWidget;
-class QValueAxis;
 class ListTestPage;
 
 class MainWindow : public QMainWindow

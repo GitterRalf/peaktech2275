@@ -1,2 +1,4 @@
 /build/
 /installer/
+/build-x86/
+/.deps/

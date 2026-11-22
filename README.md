@@ -10,7 +10,7 @@ Windows-Anwendung zur seriellen Steuerung der programmierbaren elektronischen La
 
 ## Installation unter Windows
 
-Das [GitHub-Release](https://github.com/GitterRalf/peaktech2275/releases/latest) enthält das 64-Bit-Setup mit Qt- und MinGW-Laufzeitdateien. Der Standardordner ist `C:\Programme\PeakTech 2275`. Zum Download ist ein GitHub-Konto mit Zugriff auf das private Repository erforderlich. Falls ein USB-Seriell-Adapter einen Treiber benötigt, diesen separat installieren.
+Das [GitHub-Release](https://github.com/GitterRalf/peaktech2275/releases/latest) enthält die Setups für x86 und x64 mit Qt- und MinGW-Laufzeitdateien. Der Standardordner für x64 ist `C:\Programme\PeakTech 2275`. Zum Download ist ein GitHub-Konto mit Zugriff auf das private Repository erforderlich. Falls ein USB-Seriell-Adapter einen Treiber benötigt, diesen separat installieren.
 
 ## Bedienung
 
@@ -22,13 +22,37 @@ Das [GitHub-Release](https://github.com/GitterRalf/peaktech2275/releases/latest)
 
 ## Bauen
 
-Benötigt werden ein 64-Bit-Windows-Kit mit Qt 6 einschließlich Widgets, Network, Serial Port, Charts und Linguist Tools, CMake ab 3.24 und Ninja.
+Benötigt werden ein Windows-Kit mit Qt 6 für x64 oder Qt 5.15 für x86 einschließlich Widgets, Network, Serial Port, Charts und Linguist Tools, CMake ab 3.24 und Ninja.
 
 ~~~powershell
-.\build.ps1
+.\build.ps1                    # x64
+.\build.ps1 -Architecture x86  # x86
 ~~~
 
 Das Skript baut `build\PeakTech2275.exe` und stellt die Laufzeit-DLLs bereit. Danach `PeakTech2275.iss` mit Inno Setup kompilieren. Es übernimmt die Version aus `CMakeLists.txt` und das Icon aus `assets/app.rc` und legt die Setupdatei unter `installer` ab.
+
+
+### Windows-Architekturen
+
+Die x86-Ausgabe verwendet Qt 5.15.19 mit MinGW 8.1 und hat einen eigenen
+Installationsordner **PeakTech 2275 (32 Bit)**. Auf 64-Bit-Windows können beide
+Ausgaben parallel installiert werden. Die x64-Ausgabe verwendet weiterhin
+Qt 6 und ist beim Build der Standard.
+
+Der Build für x86 nutzt `build-x86`, der Build für x64 den Ordner `build`.
+Die Installer entstehen im Projektordner mit folgenden Aufrufen.
+
+```powershell
+ISCC.exe PeakTech2275.iss
+ISCC.exe /DBuildArch=x86 PeakTech2275.iss
+```
+
+Für den x86-Build wird Qt Charts aus dem Qt-5.15.19-Kit oder einem separat
+mit MinGW x86 gebauten Modul benötigt. Für einen separaten Build erwartet
+CMake die öffentlichen und generierten Header unter `.deps/qtcharts-x86/include`,
+die Importbibliothek unter `.deps/qtcharts-x86/lib` und die DLL unter
+`.deps/qtcharts-x86/bin` oder `.deps/qtcharts-x86/lib`. Der Pfad lässt sich
+bei direkter CMake-Konfiguration über `-DQT5_CHARTS_ROOT=…` anpassen.
 
 ## Lizenz
 

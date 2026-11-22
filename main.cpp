@@ -16,7 +16,12 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon(QStringLiteral(":/device-icon.ico")));
     app.setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
     auto font = app.font();
-    font.setFamily(QFontDatabase::hasFamily(QStringLiteral("Inter")) ?
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    const bool hasInter = QFontDatabase().hasFamily(QStringLiteral("Inter"));
+#else
+    const bool hasInter = QFontDatabase::hasFamily(QStringLiteral("Inter"));
+#endif
+    font.setFamily(hasInter ?
                    QStringLiteral("Inter") : QStringLiteral("Segoe UI"));
     font.setPointSize(10);
     app.setFont(font);

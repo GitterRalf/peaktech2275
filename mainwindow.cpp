@@ -282,12 +282,12 @@ QWidget *MainWindow::createGeneralPage()
 
     updateSetpointRange();
     m_setpoint->setValue(0.2);
-    connect(m_mode, &QComboBox::currentIndexChanged, this, [this] {
+    connect(m_mode, qOverload<int>(&QComboBox::currentIndexChanged), this, [this] {
         updateSetpointRange();
         m_basicApplied = false;
         updateControls();
     });
-    connect(m_setpoint, &QDoubleSpinBox::valueChanged, this, [this] {
+    connect(m_setpoint, qOverload<double>(&QDoubleSpinBox::valueChanged), this, [this] {
         m_basicApplied = false;
         updateControls();
     });
@@ -402,7 +402,9 @@ QWidget *MainWindow::createBatteryPage()
     m_chart->legend()->hide();
     m_series = new QLineSeries(m_chart);
     m_series->setPointsVisible(true);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     m_series->setMarkerSize(4);
+#endif
     m_chart->addSeries(m_series);
     m_xAxis = new QValueAxis(m_chart);
     m_xAxis->setRange(0, 40);
@@ -481,9 +483,9 @@ QWidget *MainWindow::createBatteryPage()
         m_batteryApplied = false;
         updateControls();
     };
-    connect(m_discharge, &QDoubleSpinBox::valueChanged, this, edited);
-    connect(m_cutoff, &QDoubleSpinBox::valueChanged, this, edited);
-    connect(m_period, &QSpinBox::valueChanged, this, edited);
+    connect(m_discharge, qOverload<double>(&QDoubleSpinBox::valueChanged), this, edited);
+    connect(m_cutoff, qOverload<double>(&QDoubleSpinBox::valueChanged), this, edited);
+    connect(m_period, qOverload<int>(&QSpinBox::valueChanged), this, edited);
     connect(m_batteryApply, &QPushButton::clicked, this, [this] {
         const double current = m_discharge->value();
         const double cutoff = m_cutoff->value();

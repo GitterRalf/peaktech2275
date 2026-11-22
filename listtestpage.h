@@ -4,6 +4,7 @@
 
 #include <QElapsedTimer>
 #include <QLocale>
+#include <QVector>
 #include <QWidget>
 
 class QCheckBox;
@@ -83,8 +84,8 @@ private:
     QElapsedTimer m_started;
     QLocale m_numberLocale;
     ListProgram m_executing;
-    QList<Reading> m_samples;
-    QList<double> m_sampleTimes;
+    QVector<Reading> m_samples;
+    QVector<double> m_sampleTimes;
     bool m_connected = false;
     bool m_busy = false;
     bool m_idle = false;

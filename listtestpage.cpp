@@ -167,7 +167,7 @@ ListTestPage::ListTestPage(QWidget *parent)
     connect(m_up, &QPushButton::clicked, this, [move] { move(-1); });
     connect(m_down, &QPushButton::clicked, this, [move] { move(1); });
     connect(m_steps, &QTableWidget::itemSelectionChanged, this, &ListTestPage::updateControls);
-    connect(m_advance, &QComboBox::currentIndexChanged, this, &ListTestPage::edited);
+    connect(m_advance, qOverload<int>(&QComboBox::currentIndexChanged), this, &ListTestPage::edited);
     connect(m_repeat, &QCheckBox::toggled, this, &ListTestPage::edited);
     connect(m_read, &QPushButton::clicked, this, [this] {
         m_pending = Pending::Read;
@@ -221,7 +221,7 @@ void ListTestPage::addStep(const ListStep &step)
         combo->addItems(choices);
         combo->setCurrentIndex(qMax(0, choices.indexOf(column == modeColumn ? step.mode : step.compare)));
         m_steps->setCellWidget(row, column, combo);
-        connect(combo, &QComboBox::currentIndexChanged, this, [this, combo] {
+        connect(combo, qOverload<int>(&QComboBox::currentIndexChanged), this, [this, combo] {
             for (int i = 0; i < m_steps->rowCount(); ++i) {
                 if (m_steps->cellWidget(i, modeColumn) == combo || m_steps->cellWidget(i, compareColumn) == combo) {
                     updateRow(i);
@@ -241,7 +241,7 @@ void ListTestPage::addStep(const ListStep &step)
         input->setKeyboardTracking(false);
         input->setValue(values[column]);
         m_steps->setCellWidget(row, column, input);
-        connect(input, &QDoubleSpinBox::valueChanged, this, &ListTestPage::edited);
+        connect(input, qOverload<double>(&QDoubleSpinBox::valueChanged), this, &ListTestPage::edited);
     }
     numericCell(m_steps, row, durationColumn)->setSuffix(QStringLiteral(" s"));
     updateRow(row);
@@ -357,8 +357,8 @@ void ListTestPage::beginTest()
     m_currentStep = -1;
     m_cycleNumber = 1;
     m_cycleFinished = false;
-    m_samples = QList<Reading>(m_executing.steps.size());
-    m_sampleTimes = QList<double>(m_executing.steps.size(), -1);
+    m_samples = QVector<Reading>(m_executing.steps.size());
+    m_sampleTimes = QVector<double>(m_executing.steps.size(), -1);
     m_results->setRowCount(0);
     m_started.start();
     m_elapsed->setText(m_numberLocale.toString(0.0, 'f', 1) + QStringLiteral(" s"));
