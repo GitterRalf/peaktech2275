@@ -2,6 +2,8 @@
 
 Windows-Anwendung zur seriellen Steuerung der programmierbaren elektronischen Last PeakTech 2275. Sie zeigt Spannung, Strom und Leistung an und bietet allgemeine Laststeuerung, Batterie- und Listentests.
 
+Entwickelt und gepflegt von Ralf Tralow mit Unterstützung von OpenAI Codex.
+
 ## Bildschirmaufnahmen
 
 | Hell | Dunkel |
